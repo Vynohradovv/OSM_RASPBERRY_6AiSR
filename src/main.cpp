@@ -2,16 +2,24 @@
 #include "peripherals.h"
 #include "utilities.h"
 
+#include "arkanoid.h"
+
 #define RPiLAB
+
+arkanoid myGame;
 
 int main(int argc, char *argv[]) {
 	SystemInit();
 	DataPrepare();
+	ClearScreen();
+
 	while (1) {
+
 		UpdateIO();
 		PrintDiagnosticInfo();
-		ClearScreen();
-		DrawObjects();
+//		ClearScreen();
+
+//		DrawObjects();
 		usleep(10000);
 	}
 }
