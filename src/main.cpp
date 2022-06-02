@@ -11,14 +11,13 @@ arkanoid myGame;
 int main(int argc, char *argv[]) {
 	SystemInit();
 	DataPrepare();
-	ClearScreen();
 
 	while (1) {
 
 		UpdateIO();
-		PrintDiagnosticInfo();
-//		ClearScreen();
-
+//		PrintDiagnosticInfo();
+		ClearScreen();
+		myGame.draw();
 //		DrawObjects();
 		usleep(10000);
 	}
@@ -36,7 +35,9 @@ void* TimerThread(void* arguments)
 		{
 			destTime.tv_nsec-=1E9;
 			destTime.tv_sec++;
+
 		}
+
 		globalTimer_ms++;
 		if(!(globalTimer_ms%1000)) flash_ligth=0xFF;
  	    clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &destTime, NULL);

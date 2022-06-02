@@ -5,16 +5,19 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../arkanoid/arkanoid.cpp \
+../arkanoid/ball.cpp \
 ../arkanoid/guard.cpp \
 ../arkanoid/rectangle.cpp 
 
 OBJS += \
 ./arkanoid/arkanoid.o \
+./arkanoid/ball.o \
 ./arkanoid/guard.o \
 ./arkanoid/rectangle.o 
 
 CPP_DEPS += \
 ./arkanoid/arkanoid.d \
+./arkanoid/ball.d \
 ./arkanoid/guard.d \
 ./arkanoid/rectangle.d 
 

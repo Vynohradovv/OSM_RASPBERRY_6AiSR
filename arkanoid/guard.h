@@ -12,8 +12,11 @@ private:
 public:
 
 	guard(void);
-	void draw(void);
-	void mov(int x, int y);
+	void guard_draw(void);
+	int guard_getPosX(void);
+	int guard_getPosY(void);
+	void guard_mov(int x, int y);
+	bool guard_isTouch(int objPosX, int objPosY);
 
 };
 
