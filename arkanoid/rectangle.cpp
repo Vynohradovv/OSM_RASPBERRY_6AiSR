@@ -3,30 +3,51 @@
 
 extern unsigned int GRAPH[640 * 480];
 
-#define sizeX 		(300)
-#define sizeY		(200)
+extern int yellow_r[100][300];
+extern int yellow_g[100][300];
+extern int yellow_b[100][300];
 
-rectangle::rectangle(int x, int y, int color)
+extern int green_r[100][300];
+extern int green_g[100][300];
+extern int green_b[100][300];
+
+#define sizeX 		(100)
+#define sizeY		(33)
+
+rectangle::rectangle(void)
 {
-	prX = x;
-	prY = y;
-	prColor = color;
-
-	this->draw();
 
 }
 
-void rectangle::move(int x, int y)
+void rectangle::rectangle_create(int x, int y)
 {
 	prX = x;
 	prY = y;
 
-	this->draw();
+	this->rectangle_draw();
 }
 
-void rectangle::draw(void)
+void rectangle::rectangle_move(int x, int y)
 {
-	for (int b=prY>>2; b<(prY+sizeY)>>2; b++)
-	  for (int a=prX>>2; a<(prX+sizeX)>>2; a++)
-		  SetPixel(GRAPH,a,b, prColor);
+	prX = x;
+	prY = y;
+
+	this->rectangle_draw();
+}
+
+void rectangle::rectangle_draw(void)
+{
+
+	long color = 0;
+
+	for (int b=prY; b < (prY+sizeY); b++)
+	{
+	  for (int a=prX; a < (prX+sizeX); a++)
+	  {
+//		  color = yellow_r[b - prY][a - prX] << 16 | yellow_g[b - prY][a - prX] << 8 | yellow_b[b - prY][a - prX];
+		  color = green_r[b - prY][a - prX] << 16 | green_g[b - prY][a - prX] << 8 | green_b[b - prY][a - prX];
+		  SetPixel(GRAPH,a,b,color);
+	  }
+
+	}
 }

@@ -6,20 +6,26 @@
 CPP_SRCS += \
 ../arkanoid/arkanoid.cpp \
 ../arkanoid/ball.cpp \
+../arkanoid/green_rec.cpp \
 ../arkanoid/guard.cpp \
-../arkanoid/rectangle.cpp 
+../arkanoid/rectangle.cpp \
+../arkanoid/yellow_rec.cpp 
 
 OBJS += \
 ./arkanoid/arkanoid.o \
 ./arkanoid/ball.o \
+./arkanoid/green_rec.o \
 ./arkanoid/guard.o \
-./arkanoid/rectangle.o 
+./arkanoid/rectangle.o \
+./arkanoid/yellow_rec.o 
 
 CPP_DEPS += \
 ./arkanoid/arkanoid.d \
 ./arkanoid/ball.d \
+./arkanoid/green_rec.d \
 ./arkanoid/guard.d \
-./arkanoid/rectangle.d 
+./arkanoid/rectangle.d \
+./arkanoid/yellow_rec.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

@@ -3,6 +3,7 @@
 
 #include "ball.h"
 #include "guard.h"
+#include "rectangle.h"
 
 class arkanoid : public ball, public guard
 {

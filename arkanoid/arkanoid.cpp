@@ -1,33 +1,30 @@
 #include "arkanoid.h"
 #include "rectangle.h"
-#include "guard.h"
-#include "ball.h"
-
 #include "peripherals.h"
 
 extern volatile long globalTimer_ms;
 
 
-//rectangle k11(100,10,0xFF0000);
-//rectangle k12(450,10,0x10FF00);
-//rectangle k13(800,10,0x2090FF);
-//rectangle k14(1150,10,0xFF0010);
-//rectangle k15(1500,10,0x14FF00);
-//rectangle k16(1850,10,0x1040F6);
-//rectangle k17(2200,10,0x02003F);
-//
-//
-//rectangle k22(450,310,0x10FF00);
-//rectangle k23(800,310,0x1040F6);
-//rectangle k24(1150,310,0x2090FF);
-//rectangle k25(1500,310,0x14FF00);
-//rectangle k26(1850,310,0xFF0010);
-
+rectangle k11, k12, k13, k14, k15;
+rectangle k21, k22, k23;
 
 arkanoid::arkanoid(void)
 {
 	ball_x = 8;
 	ball_y = -8;
+
+	k11.rectangle_create(50, 	10);
+	k12.rectangle_create(160, 	10);
+	k13.rectangle_create(270, 	10);
+	k14.rectangle_create(380, 	10);
+	k15.rectangle_create(490, 	10);
+
+	k21.rectangle_create(160, 	55);
+	k22.rectangle_create(270, 	55);
+	k23.rectangle_create(380, 	55);
+
+
+
 }
 
 void arkanoid::draw(void)
@@ -79,19 +76,16 @@ void arkanoid::draw(void)
 void arkanoid::ClearScreen()
 {
 
-//	k11.draw();
-//	k12.draw();
-//	k13.draw();
-//	k14.draw();
-//	k15.draw();
-//	k16.draw();
-//	k17.draw();
-//
-//	k22.draw();
-//	k23.draw();
-//	k24.draw();
-//	k25.draw();
-//	k26.draw();
+
+	k11.rectangle_draw();
+	k12.rectangle_draw();
+	k13.rectangle_draw();
+	k14.rectangle_draw();
+	k15.rectangle_draw();
+
+	k21.rectangle_draw();
+	k22.rectangle_draw();
+	k23.rectangle_draw();
 
 	this->guard_draw();
 	this->ball_draw();
