@@ -3,24 +3,34 @@
 
 extern unsigned int GRAPH[640 * 480];
 
-#define sizeX 		(50)
-#define sizeY		(50)
+#define sizeX 		(20)
+#define sizeY		(20)
 #define gColor		(0xFF0000)
 
 ball::ball(void)
 {
-	prY = 1600; //0 - 1800
-	prX = 1100;	//0 - 2500
+	prY = 400;
+	prX = 330;
+	prVisible = true;
 
 	this->ball_draw();
+
+}
+
+void ball::ball_visible(bool f)
+{
+	prVisible = f;
 }
 
 
 void ball::ball_draw(void)
 {
-	for (int b=prY>>2; b<(prY+sizeY)>>2; b++)
-	  for (int a=prX>>2; a<(prX+sizeX)>>2; a++)
-		  SetPixel(GRAPH,a,b, gColor);
+	if(prVisible)
+	{
+		for (int b=prY; b<(prY+sizeY); b++)
+		  for (int a=prX; a<(prX+sizeX); a++)
+			  SetPixel(GRAPH,a,b, gColor);
+	}
 }
 
 void ball::ball_mov(int x, int y)

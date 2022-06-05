@@ -8,14 +8,14 @@
 
 arkanoid myGame;
 
-int main(int argc, char *argv[]) {
+  int main(int argc, char *argv[]) {
 	SystemInit();
 	DataPrepare();
 
 	while (1) {
 
 		UpdateIO();
-//		PrintDiagnosticInfo();
+		PrintDiagnosticInfo();
 		ClearScreen();
 		myGame.draw();
 //		DrawObjects();
