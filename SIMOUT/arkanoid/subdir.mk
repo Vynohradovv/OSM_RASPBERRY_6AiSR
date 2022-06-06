@@ -6,6 +6,7 @@
 CPP_SRCS += \
 ../arkanoid/arkanoid.cpp \
 ../arkanoid/ball.cpp \
+../arkanoid/blue_rec.cpp \
 ../arkanoid/green_rec.cpp \
 ../arkanoid/guard.cpp \
 ../arkanoid/rectangle.cpp \
@@ -14,6 +15,7 @@ CPP_SRCS += \
 OBJS += \
 ./arkanoid/arkanoid.o \
 ./arkanoid/ball.o \
+./arkanoid/blue_rec.o \
 ./arkanoid/green_rec.o \
 ./arkanoid/guard.o \
 ./arkanoid/rectangle.o \
@@ -22,6 +24,7 @@ OBJS += \
 CPP_DEPS += \
 ./arkanoid/arkanoid.d \
 ./arkanoid/ball.d \
+./arkanoid/blue_rec.d \
 ./arkanoid/green_rec.d \
 ./arkanoid/guard.d \
 ./arkanoid/rectangle.d \

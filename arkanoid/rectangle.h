@@ -1,6 +1,8 @@
 #ifndef _RECTANGLE_H_
 #define _RECTANGLE_H_
 
+#include <cstdlib>
+
 class rectangle
 {
 
@@ -8,6 +10,7 @@ private:
 
 	bool prVisible;
 	int prX, prY;
+	const int prColor = (std::rand() % 3);
 
 public:
 
@@ -21,6 +24,7 @@ public:
 	void rectangle_visible(bool f);
 	void rectangle_move(int x, int y);
 	void rectangle_create(int x, int y);
+	int rectangle_getColor(int x, int y);
 };
 
 

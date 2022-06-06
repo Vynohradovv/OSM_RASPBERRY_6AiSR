@@ -11,6 +11,10 @@ extern int green_r[100][300];
 extern int green_g[100][300];
 extern int green_b[100][300];
 
+extern int blue_r[100][300];
+extern int blue_g[100][300];
+extern int blue_b[100][300];
+
 #define sizeX 		(100)
 #define sizeY		(33)
 
@@ -25,6 +29,30 @@ rectangle::rectangle(const int& x, const int& y)
 {
 	prVisible = true;
 	this->rectangle_create(x, y);
+}
+
+int rectangle::rectangle_getColor(int x, int y)
+{
+	switch(prColor)
+	{
+	case 0:
+		return green_r[y - prY][x - prX] << 16 | green_g[y - prY][x - prX] << 8 | green_b[y - prY][x - prX];
+		break;
+
+	case 1:
+		return yellow_r[y - prY][x - prX] << 16 | yellow_g[y - prY][x - prX] << 8 | yellow_b[y - prY][x - prX];
+		break;
+
+	case 2:
+		return blue_r[y - prY][x - prX] << 16 | blue_g[y - prY][x - prX] << 8 | blue_b[y - prY][x - prX];
+		break;
+
+	default:
+		return 0xFF0000;
+		break;
+	}
+
+
 }
 
 void rectangle::rectangle_visible(bool f)
@@ -67,8 +95,6 @@ void rectangle::rectangle_move(int x, int y)
 void rectangle::rectangle_draw(void)
 {
 
-	long color = 0;
-
 	if(prVisible)
 	{
 		for (int b=prY; b < (prY+sizeY); b++)
@@ -76,8 +102,9 @@ void rectangle::rectangle_draw(void)
 		  for (int a=prX; a < (prX+sizeX); a++)
 		  {
 	//		  color = yellow_r[b - prY][a - prX] << 16 | yellow_g[b - prY][a - prX] << 8 | yellow_b[b - prY][a - prX];
-			  color = green_r[b - prY][a - prX] << 16 | green_g[b - prY][a - prX] << 8 | green_b[b - prY][a - prX];
-			  SetPixel(GRAPH,a,b,color);
+//			  prColor = green_r[b - prY][a - prX] << 16 | green_g[b - prY][a - prX] << 8 | green_b[b - prY][a - prX];
+
+			  SetPixel(GRAPH,a,b,this->rectangle_getColor(a, b));
 		  }
 		}
 	}
