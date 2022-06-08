@@ -15,7 +15,7 @@ arkanoid myGame;
 	while (1) {
 
 		UpdateIO();
-		PrintDiagnosticInfo();
+//		PrintDiagnosticInfo();
 		ClearScreen();
 		myGame.draw();
 //		DrawObjects();

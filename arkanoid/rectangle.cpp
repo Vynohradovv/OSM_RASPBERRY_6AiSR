@@ -3,17 +3,25 @@
 
 extern unsigned int GRAPH[640 * 480];
 
-extern int yellow_r[100][300];
-extern int yellow_g[100][300];
-extern int yellow_b[100][300];
+extern int yellow_r[33][100];
+extern int yellow_g[33][100];
+extern int yellow_b[33][100];
 
-extern int green_r[100][300];
-extern int green_g[100][300];
-extern int green_b[100][300];
+extern int green_r[33][100];
+extern int green_g[33][100];
+extern int green_b[33][100];
 
-extern int blue_r[100][300];
-extern int blue_g[100][300];
-extern int blue_b[100][300];
+extern int blue_r[33][100];
+extern int blue_g[33][100];
+extern int blue_b[33][100];
+
+extern int purple_r[33][100];
+extern int purple_g[33][100];
+extern int purple_b[33][100];
+
+extern int red_r[33][100];
+extern int red_g[33][100];
+extern int red_b[33][100];
 
 #define sizeX 		(100)
 #define sizeY		(33)
@@ -45,6 +53,14 @@ int rectangle::rectangle_getColor(int x, int y)
 
 	case 2:
 		return blue_r[y - prY][x - prX] << 16 | blue_g[y - prY][x - prX] << 8 | blue_b[y - prY][x - prX];
+		break;
+
+	case 3:
+		return purple_r[y - prY][x - prX] << 16 | purple_g[y - prY][x - prX] << 8 | purple_b[y - prY][x - prX];
+		break;
+
+	case 4:
+		return red_r[y - prY][x - prX] << 16 | red_g[y - prY][x - prX] << 8 | red_b[y - prY][x - prX];
 		break;
 
 	default:
@@ -101,9 +117,6 @@ void rectangle::rectangle_draw(void)
 		{
 		  for (int a=prX; a < (prX+sizeX); a++)
 		  {
-	//		  color = yellow_r[b - prY][a - prX] << 16 | yellow_g[b - prY][a - prX] << 8 | yellow_b[b - prY][a - prX];
-//			  prColor = green_r[b - prY][a - prX] << 16 | green_g[b - prY][a - prX] << 8 | green_b[b - prY][a - prX];
-
 			  SetPixel(GRAPH,a,b,this->rectangle_getColor(a, b));
 		  }
 		}

@@ -4,6 +4,29 @@
 
 extern volatile long globalTimer_ms;
 
+#define TEXT_GO_X		(200)
+#define TEXT_GO_Y		(200)
+#define TEXT_GO_SIZE_X	(300)
+#define TEXT_GO_SIZE_Y	(50)
+
+#define TEXT_WIN_X		(40)
+#define TEXT_WIN_Y		(200)
+#define TEXT_WIN_SIZE_X	(556)
+#define TEXT_WIN_SIZE_Y	(50)
+
+#define MAX_SCORE		(9)
+
+
+extern unsigned int GRAPH[640 * 480];
+
+extern int game_over_r[50][300];
+extern int game_over_g[50][300];
+extern int game_over_b[50][300];
+
+extern int you_win_r[50][556];
+extern int you_win_g[50][556];
+extern int you_win_b[50][556];
+
 
 rectangle k11(50,10), k12(160,10), k13(270,10), k14(380,10), k15(490,10);
 rectangle k21(160,55), k22(270,55), k23(380,55);
@@ -19,6 +42,8 @@ arkanoid::arkanoid(void)
 	guard_step_right = -10;
 	start_game = false;
 	game_over = false;
+	win_game = false;
+	score = 0;
 }
 
 bool arkanoid::isConnect(rectangle *obj)
@@ -30,13 +55,49 @@ bool arkanoid::isConnect(rectangle *obj)
 		obj->rectangle_visible(false);
 		ball_y = -ball_y;
 		ball_x = -ball_x;
+		score++;
 	}
 	return false;
 }
 
+void arkanoid::ShowTextGameOver(void)
+{
+	for (int b=TEXT_GO_Y; b<(TEXT_GO_Y+TEXT_GO_SIZE_Y); b++)
+	{
+	  for (int a=TEXT_GO_X; a<(TEXT_GO_X+TEXT_GO_SIZE_X); a++)
+	  {
+		  int Color = game_over_r[b - TEXT_GO_Y][a - TEXT_GO_X] << 16 | game_over_g[b - TEXT_GO_Y][a - TEXT_GO_X] << 8 | game_over_b[b - TEXT_GO_Y][a - TEXT_GO_X];
+		  SetPixel(GRAPH,a,b, Color);
+	  }
+	}
+}
+
+void arkanoid::ShowTextWin(void)
+{
+	for (int b=TEXT_WIN_Y; b<(TEXT_WIN_Y+TEXT_WIN_SIZE_Y); b++)
+	{
+	  for (int a=TEXT_WIN_X; a<(TEXT_WIN_X+TEXT_WIN_SIZE_X); a++)
+	  {
+		  int Color = you_win_r[b - TEXT_WIN_Y][a - TEXT_WIN_X] << 16 | you_win_g[b - TEXT_WIN_Y][a - TEXT_WIN_X] << 8 | you_win_b[b - TEXT_WIN_Y][a - TEXT_WIN_X];
+		  SetPixel(GRAPH,a,b, Color);
+	  }
+	}
+}
+
+void arkanoid::WineGame(void)
+{
+	if((globalTimer_ms % 15) && win_game)
+	{
+		if(score >= MAX_SCORE)
+		{
+			this->ShowTextWin();
+		}
+	}
+}
+
 void arkanoid::GameOver(void)
 {
-	if((globalTimer_ms % 25) && game_over)
+	if((globalTimer_ms % 15) && game_over)
 	{
 
 		if(k11.rectangle_getPosY() < 350)
@@ -44,6 +105,8 @@ void arkanoid::GameOver(void)
 			k11.rectangle_move(rectangle_x, rectangle_y);
 		}else{
 			k11.rectangle_visible(false);
+
+			if(win_game != true) this->ShowTextGameOver();
 		}
 
 		if(k12.rectangle_getPosY() < 350)
@@ -106,7 +169,7 @@ void arkanoid::GameOver(void)
 
 void arkanoid::ProcessGame(void)
 {
-	if((globalTimer_ms % 25) && start_game)
+	if((globalTimer_ms % 15) && start_game)
 	{
 		this->ball_mov(ball_x, ball_y);
 
@@ -145,6 +208,11 @@ void arkanoid::ProcessGame(void)
 		if(k23.rectangle_isActive()) this->isConnect(&k23);
 
 		if(k31.rectangle_isActive()) this->isConnect(&k31);
+
+		if(score >= MAX_SCORE)
+		{
+			win_game = true;
+		}
 	}
 
 }
@@ -159,11 +227,17 @@ void arkanoid::draw(void)
 	{
 
 	case 105:
-		if(start_game) this->guard_mov(guard_step_right,0);
+		if(start_game && (this->guard_getPosX() > 50))
+		{
+			this->guard_mov(guard_step_right,0);
+		}
 		break;
 
 	case 106:
-		if(start_game) this->guard_mov(guard_step_left,0);
+		if((start_game) && (this->guard_getPosX() < 500))
+		{
+			this->guard_mov(guard_step_left,0);
+		}
 		break;
 
 	case 57:
@@ -177,6 +251,7 @@ void arkanoid::draw(void)
 
 	this->ProcessGame();
 	this->GameOver();
+	this->WineGame();
 
 
 

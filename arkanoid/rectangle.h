@@ -10,7 +10,7 @@ private:
 
 	bool prVisible;
 	int prX, prY;
-	const int prColor = (std::rand() % 3);
+	const int prColor = (std::rand() % 5);
 
 public:
 

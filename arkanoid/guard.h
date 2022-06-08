@@ -7,7 +7,7 @@ class guard
 
 private:
 
-	int prX, prY;
+	int prX, prY, prColor;
 
 public:
 
